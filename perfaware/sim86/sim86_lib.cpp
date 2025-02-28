@@ -12,18 +12,23 @@
 
 #define assert(...)
 
-#include "sim86.h"
+#include <stdio.h>
 
+#include "sim86.h"
 #include "sim86_instruction.h"
 #include "sim86_instruction_table.h"
 #include "sim86_memory.h"
 #include "sim86_decode.h"
+#include "sim86_execute.h"
+#include "sim86_cycles.h"
+#include "sim86_text.h"
 
 #include "sim86_instruction.cpp"
 #include "sim86_instruction_table.cpp"
 #include "sim86_memory.cpp"
 #include "sim86_decode.cpp"
 #include "sim86_text_table.cpp"
+#include "sim86_text.cpp"
 
 extern "C" u32 Sim86_GetVersion(void)
 {
@@ -70,4 +75,9 @@ extern "C" char const *Sim86_MnemonicFromOperationType(operation_type Type)
 extern "C" void Sim86_Get8086InstructionTable(instruction_table *Dest)
 {
     *Dest = Get8086InstructionTable();
+}
+
+extern "C" void Sim86_PrintInstruction(instruction Instruction, FILE* Dest)
+{
+    PrintInstruction(Instruction, Dest);
 }
